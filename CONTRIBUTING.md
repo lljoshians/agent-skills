@@ -81,42 +81,8 @@ See any existing skill for examples.
 
 ### Keep It Practical
 
-- Focus on what developers actually need to do
-- Include concrete examples, not abstract theory
-- Link to official docs for deep dives
-
-### Keep It Current
-
-- Target WordPress 6.9+ and PHP 7.2.24+
-- Avoid legacy patterns (Classic themes, pre-Gutenberg APIs)
-- Update compatibility frontmatter when requirements change
-
-### Keep It Testable
-
-- Add at least one eval scenario for new skills
-- Run `node eval/harness/run.mjs` before submitting
-
-### Keep It Small
-
-- Prefer small, focused skills over mega-skills
-- Keep `SKILL.md` short—push depth into `references/`
-- One skill should do one thing well
-
-## Submitting Changes
-
-1. Fork the repo
-2. Create a branch (`git checkout -b improve-block-dev-skill`)
-3. Make your changes
-4. Run validation: `node eval/harness/run.mjs`
-5. Commit with a clear message
-6. Open a pull request
-
-For significant changes, consider opening an issue first to discuss the approach.
-
-## Questions?
-
-Open an issue or start a discussion. We're happy to help you get started.
+- Focus
 
 ---
 
-*Your WordPress knowledge can help thousands of developers get better AI assistance. Thank you for contributing!*
+> **Personal note (my fork):** I'm mainly using this repo for learning and local experimentation. If you stumbled across this fork, the upstream repo at [WordPress/agent-skills](https://github.com/WordPress/agent-skills) is the one you probably want. I may have branches with half-baked ideas that never get PRed upstream — fair warning.
