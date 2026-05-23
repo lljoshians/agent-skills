@@ -47,6 +47,8 @@ This is a great low-barrier contribution—you're essentially writing "what shou
 
 > **My note:** Seconding this — I spent an afternoon just writing scenarios for the block-editor skill before touching anything else, and it genuinely clarified what the skill was even trying to do. Highly recommend this approach if you're new to the project.
 
+> **Fork note (me):** Same experience here. I started with the FSE/site-editor skill and writing the scenarios first saved me from going down a completely wrong path in the actual SKILL.md. Do this first, seriously.
+
 ### 4. Report Issues
 
 Found a skill giving bad advice? AI following a procedure that doesn't work? Open an issue with:
@@ -71,9 +73,4 @@ skills/<skill-name>/
 
 Every `SKILL.md` needs:
 
-1. **YAML frontmatter** with `name`, `description`, and `compatibility`
-2. **When to use** — Conditions that trigger this skill
-3. **Inputs required** — What the AI needs to gather first
-4. **Procedure** — Step-by-step checklist
-5. **Verification** — How to confirm it worked
-6. **Failure modes / de
+1. **YAML frontmatter** with `name`, `
