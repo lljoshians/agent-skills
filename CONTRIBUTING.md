@@ -43,6 +43,8 @@ Every skill needs test scenarios under `eval/scenarios/`. These are simple markd
 
 This is a great low-barrier contribution—you're essentially writing "what should happen when someone asks X?"
 
+> **Personal note:** I've found that writing eval scenarios is actually the best way to deeply understand a skill. I usually start here before touching SKILL.md itself.
+
 ### 4. Report Issues
 
 Found a skill giving bad advice? AI following a procedure that doesn't work? Open an issue with:
@@ -82,7 +84,3 @@ See any existing skill for examples.
 ### Keep It Practical
 
 - Focus
-
----
-
-> **Personal note (my fork):** I'm mainly using this repo for learning and local experimentation. If you stumbled across this fork, the upstream repo at [WordPress/agent-skills](https://github.com/WordPress/agent-skills) is the one you probably want. I may have branches with half-baked ideas that never get PRed upstream — fair warning.
