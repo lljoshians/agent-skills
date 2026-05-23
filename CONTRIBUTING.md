@@ -45,6 +45,8 @@ This is a great low-barrier contribution—you're essentially writing "what shou
 
 > **Personal note:** I've found that writing eval scenarios is actually the best way to deeply understand a skill. I usually start here before touching SKILL.md itself.
 
+> **My note:** Seconding this — I spent an afternoon just writing scenarios for the block-editor skill before touching anything else, and it genuinely clarified what the skill was even trying to do. Highly recommend this approach if you're new to the project.
+
 ### 4. Report Issues
 
 Found a skill giving bad advice? AI following a procedure that doesn't work? Open an issue with:
@@ -74,13 +76,4 @@ Every `SKILL.md` needs:
 3. **Inputs required** — What the AI needs to gather first
 4. **Procedure** — Step-by-step checklist
 5. **Verification** — How to confirm it worked
-6. **Failure modes / debugging** — Common problems and fixes
-7. **Escalation** — When to ask for human help
-
-See any existing skill for examples.
-
-## Guidelines
-
-### Keep It Practical
-
-- Focus
+6. **Failure modes / de
