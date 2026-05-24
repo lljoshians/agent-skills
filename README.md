@@ -1,152 +1,91 @@
-# Agent Skills for WordPress
+# Agent Skills
 
-**Teach AI coding assistants how to build WordPress the right way.**
+A fork of [WordPress/agent-skills](https://github.com/WordPress/agent-skills) — a collection of reusable AI agent skills for automating common WordPress development workflows.
 
-Agent Skills are portable bundles of instructions, checklists, and scripts that help AI assistants (Claude, Copilot, Codex, Cursor, etc.) understand WordPress development patterns, avoid common mistakes, and follow best practices.
+## Overview
 
-> **AI Authorship Disclosure:** These skills were generated using GPT-5.2 Codex (High Reasoning) from official Gutenberg and WordPress documentation, then reviewed and edited by WordPress contributors. We tested skills with AI assistants and iterated based on results. This is v1, and skills will improve as the community uses them and contributes fixes. See [docs/ai-authorship.md](docs/ai-authorship.md) for details. ([WordPress AI Guidelines](https://make.wordpress.org/ai/handbook/ai-guidelines/))
+This repository contains a curated set of skills that can be used by AI agents to assist with:
 
-## Why Agent Skills?
+- **Code Review** — Automated PR analysis, style checks, and feedback
+- **Issue Triage** — Labeling, prioritizing, and routing issues
+- **Upstream Sync** — Keeping forks in sync with upstream repositories
+- **Props Management** — Tracking and attributing contributors
+- **CI Maintenance** — Monitoring and responding to workflow failures
 
-AI coding assistants are powerful, but they often:
-- Generate outdated WordPress patterns (pre-Gutenberg, pre-block themes)
-- Miss critical security considerations in plugin development
-- Skip proper block deprecations, causing "Invalid block" errors
-- Ignore existing tooling in your repo
+## Skills
 
-Agent Skills solve this by giving AI assistants **expert-level WordPress knowledge** in a format they can actually use.
+| Skill | Description | Workflow |
+|-------|-------------|----------|
+| `ai-skill-maintenance` | Monitors and maintains AI skill definitions | `.github/workflows/ai-skill-maintenance.yml` |
+| `upstream-sync` | Syncs fork with upstream changes | `.github/workflows/upstream-sync.yml` |
+| `props-bot` | Manages contributor props on PRs/commits | `.github/workflows/props-bot.yml` |
+| `ci` | Runs continuous integration checks | `.github/workflows/ci.yml` |
 
-## Available Skills
+## Getting Started
 
-| Skill | What it teaches |
-|-------|-----------------|
-| **wordpress-router** | Classifies WordPress repos and routes to the right workflow |
-| **wp-project-triage** | Detects project type, tooling, and versions automatically |
-| **wp-block-development** | Gutenberg blocks: `block.json`, attributes, rendering, deprecations |
-| **wp-block-themes** | Block themes: `theme.json`, templates, patterns, style variations |
-| **wp-plugin-development** | Plugin architecture, hooks, settings API, security |
-| **wp-rest-api** | REST API routes/endpoints, schema, auth, and response shaping |
-| **wp-interactivity-api** | Frontend interactivity with `data-wp-*` directives and stores |
-| **wp-abilities-api** | Capability-based permissions and REST API authentication |
-| **wp-wpcli-and-ops** | WP-CLI commands, automation, multisite, search-replace |
-| **wp-performance** | Profiling, caching, database optimization, Server-Timing |
-| **wp-phpstan** | PHPStan static analysis for WordPress projects (config, baselines, WP-specific typing) |
-| **wp-playground** | WordPress Playground for instant local environments |
-| **wpds** | WordPress Design System |
-| **wp-plugin-directory-guidelines** | WordPress Plugin Directory Guidelines |
-| **blueprint** | WordPress Playground Blueprints for declarative Playground environment setup |
+### Prerequisites
 
-## Quick Start
+- Node.js 18+
+- A GitHub repository with Actions enabled
+- A GitHub token with appropriate permissions
 
-### Install globally for Claude Code
+### Installation
 
-```bash
-# Clone agent-skills
-git clone https://github.com/WordPress/agent-skills.git
-cd agent-skills
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/your-org/agent-skills.git
+   cd agent-skills
+   ```
 
-# Build the distribution
-node shared/scripts/skillpack-build.mjs --clean
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-# Install all skills globally (available across all projects)
-node shared/scripts/skillpack-install.mjs --global
+3. Configure your environment:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your settings
+   ```
 
-# Or install specific skills only
-node shared/scripts/skillpack-install.mjs --global --skills=wp-playground,wp-block-development
-```
+### Usage
 
-This installs skills to `~/.claude/skills/` where Claude Code will automatically discover them.
-
-### Install into your repo
+Skills are triggered via GitHub Actions workflows. Each workflow can also be run locally using [act](https://github.com/nektos/act):
 
 ```bash
-# Clone agent-skills
-git clone https://github.com/WordPress/agent-skills.git
-cd agent-skills
-
-# Build the distribution
-node shared/scripts/skillpack-build.mjs --clean
-
-# Install into your WordPress project
-node shared/scripts/skillpack-install.mjs --dest=../your-wp-project --targets=codex,vscode,claude,cursor
+act push -W .github/workflows/ci.yml
 ```
 
-This copies skills into:
-- `.codex/skills/` for OpenAI Codex
-- `.github/skills/` for VS Code / GitHub Copilot
-- `.claude/skills/` for Claude Code (project-level)
-- `.cursor/skills/` for Cursor (project-level)
+## Configuration
 
-### Install globally for Cursor
+Skill behavior can be customized via repository variables and secrets. See each workflow file for available configuration options.
 
-```bash
-node shared/scripts/skillpack-install.mjs --targets=cursor-global
-```
+### Required Secrets
 
-This installs skills to `~/.cursor/skills/` where Cursor will discover them.
+| Secret | Description |
+|--------|-------------|
+| `GITHUB_TOKEN` | Standard GitHub token (auto-provided) |
+| `AI_API_KEY` | API key for AI provider (if using AI features) |
 
-### Available options
+### Repository Variables
 
-```bash
-# List available skills
-node shared/scripts/skillpack-install.mjs --list
-
-# Dry run (preview without installing)
-node shared/scripts/skillpack-install.mjs --global --dry-run
-
-# Install specific skills to a project (e.g. Claude + Cursor)
-node shared/scripts/skillpack-install.mjs --dest=../my-repo --targets=claude,cursor --skills=wp-wpcli-and-ops
-```
-
-### Manual installation
-
-Copy any skill folder from `skills/` into your project's instructions directory for your AI assistant.
-
-## How It Works
-
-Each skill contains:
-
-```
-skills/wp-block-development/
-├── SKILL.md              # Main instructions (when to use, procedure, verification)
-├── references/           # Deep-dive docs on specific topics
-│   ├── block-json.md
-│   ├── deprecations.md
-│   └── ...
-└── scripts/              # Deterministic helpers (detection, validation)
-    └── list_blocks.mjs
-```
-
-When you ask your AI assistant to work on WordPress code, it reads these skills and follows the documented procedures rather than guessing.
-
-## Compatibility
-
-- **WordPress 6.9+** (PHP 7.2.24+)
-- Works with any AI assistant that supports project-level instructions
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `UPSTREAM_REPO` | `WordPress/agent-skills` | The upstream repository to sync from |
+| `SYNC_BRANCH` | `trunk` | Branch to sync from upstream |
 
 ## Contributing
 
-**We welcome contributions!** This project is a great way to share your WordPress expertise—you don't need to be a coding wizard. Most skills are written in Markdown, focusing on clear procedures and best practices.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this project.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
+## Fork Differences
 
-Quick commands:
+This fork includes the following changes from upstream:
 
-```bash
-# Scaffold a new skill
-node shared/scripts/scaffold-skill.mjs <skill-name> "<description>"
-
-# Validate skills
-node eval/harness/run.mjs
-```
-
-## Documentation
-
-- [Authoring Guide](docs/authoring-guide.md) - How to create and improve skills
-- [Principles](docs/principles.md) - Design philosophy
-- [Packaging](docs/packaging.md) - Build and distribution
-- [Compatibility Policy](docs/compatibility-policy.md) - Version targeting
+- Enhanced CI pipeline with additional linting steps
+- Extended props-bot with Slack notification support
+- Custom upstream sync conflict resolution strategy
 
 ## License
 
-GPL-2.0-or-later
+This project is licensed under the terms described in [LICENSE](LICENSE).
