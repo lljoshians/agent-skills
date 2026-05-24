@@ -63,14 +63,22 @@ Each skill follows this structure:
 ```
 skills/<skill-name>/
 ├── SKILL.md              # Main instructions (short, procedural)
-├── references/           # Deep-dive docs on specific topics
-│   └── *.md
-└── scripts/              # Deterministic helpers (optional)
-    └── *.mjs
+├── references/           # Supporting reference docs
+├── eval/
+│   └── scenarios/        # Test scenarios for this skill
+└── README.md             # Optional human-facing summary
 ```
 
-### SKILL.md Requirements
+## Getting Started Locally
 
-Every `SKILL.md` needs:
+```bash
+git clone https://github.com/YOUR_USERNAME/agent-skills
+cd agent-skills
+npm install
+```
 
-1. **YAML frontmatter** with `name`, `
+No build step needed for most contributions — you're mostly editing Markdown files.
+
+## Questions?
+
+Feel free to open a discussion or issue. This project is friendly to newcomers and we're happy to help you find a good first contribution.
