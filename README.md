@@ -72,7 +72,7 @@ Skill behavior can be customized via repository variables and secrets. See each 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `UPSTREAM_REPO` | `WordPress/agent-skills` | The upstream repository to sync from |
-| `SYNC_BRANCH` | `trunk` | Branch to sync from upstream |
+| `SYNC_BRANCH` | `main` | Branch to sync from upstream (upstream uses `trunk`, but I prefer `main` for my fork) |
 
 ## Contributing
 
