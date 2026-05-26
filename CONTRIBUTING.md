@@ -66,23 +66,19 @@ skills/<skill-name>/
 ├── references/           # Supporting reference docs
 ├── eval/
 │   └── scenarios/        # Test scenarios for this skill
-└── README.md             # Optional: human-readable overview
+└── README.md             # Optional overview
 ```
 
 ## Getting Started Locally
 
 ```bash
-git clone https://github.com/<your-fork>/agent-skills.git
+git clone https://github.com/YOUR-USERNAME/agent-skills.git
 cd agent-skills
 npm install
 ```
 
-Run the eval suite to make sure everything passes before opening a PR:
-
-```bash
-npm test
-```
+There's no build step for most contributions — you're editing Markdown files. The `npm install` just pulls in tooling for scaffolding and running evals.
 
 ## Questions?
 
-Feel free to open a discussion or reach out via issues. This is a friendly project — no contribution is too small.
+Open an issue or start a discussion. This is a friendly project and we're happy to help you find a good first contribution.
